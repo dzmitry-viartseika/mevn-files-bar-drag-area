@@ -1,0 +1,205 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+
+  "extends": [
+    "plugin:vue/recommended",
+    "eslint:recommended",
+    "@vue/typescript/recommended",
+    "plugin:vue/essential"
+  ],
+
+  "parser": "vue-eslint-parser",
+
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "parser": "@typescript-eslint/parser",
+    "project": "tsconfig.json",
+    "sourceType": "module",
+    "extraFileExtensions": [".vue"],
+    "createDefaultProgram": true
+  },
+
+  "plugins": [
+    "vue",
+    "@typescript-eslint"
+  ],
+
+  "rules": {
+    "no-console": ["error", {"allow": ["warn", "error"]}],
+    "no-debugger": "warn",
+    "@typescript-eslint/adjacent-overload-signatures": "warn",
+    "@typescript-eslint/array-type": "warn",
+    "@typescript-eslint/ban-types": "warn",
+    "@typescript-eslint/consistent-type-assertions": "warn",
+    "@typescript-eslint/consistent-type-definitions": "warn",
+    "no-dupe-class-members": "off",
+    "@typescript-eslint/no-dupe-class-members": ["error"],
+    "@typescript-eslint/indent": [
+      "warn",
+      2,
+      {
+        "FunctionDeclaration": {
+          "parameters": "first"
+        },
+        "FunctionExpression": {
+          "parameters": "first"
+        },
+        "SwitchCase": 1
+      }
+    ],
+    "indent": [
+      "warn",
+      2,
+      {
+        "FunctionDeclaration": {
+          "parameters": "first"
+        },
+        "FunctionExpression": {
+          "parameters": "first"
+        },
+        "SwitchCase": 1
+      }
+    ],
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/member-delimiter-style": [
+      "warn",
+      {
+        "multiline": {
+          "delimiter": "semi",
+          "requireLast": true
+        },
+        "singleline": {
+          "delimiter": "semi",
+          "requireLast": false
+        }
+      }
+    ],
+    "@typescript-eslint/member-ordering": "warn",
+    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-misused-new": "warn",
+    "@typescript-eslint/no-namespace": "warn",
+    "no-param-reassign": "warn",
+    "@typescript-eslint/no-parameter-properties": "off",
+    "@typescript-eslint/no-this-alias": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-var-requires": "warn",
+    "@typescript-eslint/prefer-for-of": "warn",
+    "@typescript-eslint/prefer-function-type": "warn",
+    "@typescript-eslint/prefer-namespace-keyword": "warn",
+    "@typescript-eslint/quotes": [
+      "warn",
+      "single"
+    ],
+    "@typescript-eslint/semi": ["warn", "always"],
+    "@typescript-eslint/triple-slash-reference": "warn",
+    "@typescript-eslint/type-annotation-spacing": "warn",
+    "@typescript-eslint/unified-signatures": "warn",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "arrow-body-style": "warn",
+    "arrow-parens": "warn",
+    "camelcase": "warn",
+    "comma-dangle": [
+      "warn",
+      "always-multiline"
+    ],
+    "complexity": "off",
+    "constructor-super": "warn",
+    "curly": "warn",
+    "dot-notation": "warn",
+    "eol-last": "warn",
+    "eqeqeq": [
+      "warn",
+      "always"
+    ],
+    "guard-for-in": "warn",
+    "id-blacklist": "warn",
+    "id-match": "warn",
+    "new-parens": "warn",
+    "no-bitwise": "warn",
+    "no-caller": "warn",
+    "no-cond-assign": "warn",
+    "no-duplicate-imports": "warn",
+    "no-empty": "warn",
+    "no-eval": "warn",
+    "no-fallthrough": "off",
+    "no-invalid-this": "off",
+    "no-multiple-empty-lines": "off",
+    "no-new-wrappers": "warn",
+    "no-shadow": [
+      "off",
+      {
+        "hoist": "all"
+      }
+    ],
+    "no-throw-literal": "warn",
+    "no-trailing-spaces": "warn",
+    "no-undef-init": "warn",
+    "no-underscore-dangle": "off",
+    "no-unsafe-finally": "warn",
+    "no-unused-expressions": [
+      "warn",
+      {
+        "allowShortCircuit": true
+      }
+    ],
+    "no-unused-labels": "warn",
+    "no-var": "warn",
+    "one-var": [
+      "warn",
+      "never"
+    ],
+    "prefer-const": "off",
+    "prefer-template": "warn",
+    "quote-props": [
+      "warn",
+      "consistent"
+    ],
+    "radix": "warn",
+    "space-before-function-paren": "off",
+    "spaced-comment": [
+      "off",
+      "never"
+    ],
+    "use-isnan": "warn",
+    "valid-typeof": "off",
+    "object-curly-spacing": [
+      "warn",
+      "always"
+    ],
+    "brace-style": [
+      "warn",
+      "1tbs",
+      {
+        "allowSingleLine": false
+      }
+    ],
+    "semi": "off",
+    "semi-style": ["error", "last"],
+    "operator-linebreak": "off",
+    "no-useless-return": "off",
+    "no-extra-boolean-cast": "off",
+    "no-unused-vars": "warn",
+    "object-shorthand": "off",
+    "no-useless-constructor": "warn",
+    "no-return-await": "off"
+  },
+
+  "overrides": [
+    {
+      "files": [
+        "**/__tests__/unit/**/*.spec.{j,t}s?(x)"
+      ],
+
+      "env": {
+        "jest": true
+      }
+    }
+  ]
+}
