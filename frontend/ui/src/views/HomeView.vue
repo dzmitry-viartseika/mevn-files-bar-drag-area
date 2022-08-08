@@ -1,13 +1,16 @@
 <template>
-  <div>
-      wertey
-  </div>
+  <upload-file />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import UploadFile from '@/components/Uploads/UploadFile.vue';
 
 @Options({
+  components: {
+    UploadFile,
+  },
+
   // components: {
   //   HelloWorld,
   // },

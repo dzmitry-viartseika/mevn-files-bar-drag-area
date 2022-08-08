@@ -38,5 +38,13 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "rules": {
+    "class-methods-use-this": "off",
+    "no-console": ["error", {"allow": ["warn", "error"]}],
+    "camelcase": 2,
+    "dot-notation": [2, {"allowPattern": "^[a-z]+(_[a-z]+)+$"}],
+    "no-shadow": ["error", { "allow": ["state"] }],
+    "@typescript-eslint/no-shadow": ["error"]
+  }
 }
