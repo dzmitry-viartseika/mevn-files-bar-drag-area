@@ -3,11 +3,13 @@
     <Messages v-if="message" />
     <form @submit.prevent="onSubmit($event)">
       <div class='custom-file mb-4'>
+        <h1>Single upload file</h1>
         <input
           type='file'
           class='custom-file-input'
           id='customFile'
           @change="onChange($event)"
+          multiple
         />
         <label class='custom-file-label' htmlFor='customFile'>
           {{ filename }}
@@ -58,15 +60,16 @@ export default class UploadFIleWithProgressBar extends Vue {
 
   onChange(e: any) {
     if (!e) return;
-    this.file = e.target.files[0];
-    this.filename = e.target.files[0].name;
+    this.file = e.target.files;
   }
 
   async onSubmit(e: any) {
     const formData = new FormData();
     formData.append('file', this.file);
+    // eslint-disable-next-line
+    console.log('formData', formData);
     try {
-      const { data } = await axios.post('http://localhost:4000/upload',
+      const { data } = await axios.post('http://localhost:4000/multiple-upload',
         formData,
         {
           headers: {

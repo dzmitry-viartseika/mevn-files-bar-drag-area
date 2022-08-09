@@ -31,9 +31,18 @@ app.use('/uploads', express.static('uploads'));
 app.use(express.json());
 
 // FILES
-app.post('/upload', upload.single('file'), (req, res) => {
+app.post('/single-upload', upload.single('file'), (req, res) => {
     res.json({
         url: `/uploads/${req.file.originalname}`,
+    });
+});
+
+app.post('/multiple-upload', upload.array('files', 10), (req, res) => {
+    console.log(req.file);
+    // const result = req.files.map((file) => `/uploads/${file.originalname}`);
+    // console.log('result', result);
+    res.json({
+        files: req.files,
     });
 });
 
