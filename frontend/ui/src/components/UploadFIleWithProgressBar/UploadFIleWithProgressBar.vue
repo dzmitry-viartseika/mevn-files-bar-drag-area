@@ -1,13 +1,13 @@
 <template>
   <div>
     <Messages v-if="message" />
-    <form @submit="onSubmit">
+    <form @submit.prevent="onSubmit($event)">
       <div class='custom-file mb-4'>
         <input
           type='file'
           class='custom-file-input'
           id='customFile'
-          @change="onChange"
+          @change="onChange($event)"
         />
         <label class='custom-file-label' htmlFor='customFile'>
           {{ filename }}
@@ -63,25 +63,24 @@ export default class UploadFIleWithProgressBar extends Vue {
   }
 
   async onSubmit(e: any) {
-    e.peventDefault();
     const formData = new FormData();
     formData.append('file', this.file);
-
     try {
-      const res = await axios.post('/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          // this.uploadPercentage = parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total));
-          this.uploadPercentage = 55;
-        }
-      });
+      const { data } = await axios.post('http://localhost:4000/upload',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            this.uploadPercentage = Number(Math.round((progressEvent!.loaded * 100) / progressEvent!.total));
+          }
+        });
 
       // Clear percentage
-      setTimeout(() => this.uploadPercentage = 0, 10000);
+      setTimeout(() => this.uploadPercentage = 0, 3000);
 
-      const { fileName, filePath } = res.data;
+      const { fileName, filePath } = data;
 
       this.uploadedFile = {
         fileName,

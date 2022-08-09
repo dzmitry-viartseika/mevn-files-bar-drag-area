@@ -5,6 +5,7 @@ import multer from 'multer';
 import cors from 'cors';
 import fs from 'fs';
 
+
 dotenv.config();
 
 mongoose
@@ -14,7 +15,6 @@ mongoose
 
 const app = express();
 app.use(cors());
-
 const storage = multer.diskStorage({
     destination: (_, __, cb) => {
         if (!fs.existsSync('uploads')) {
@@ -26,16 +26,20 @@ const storage = multer.diskStorage({
         cb(null, file.originalname);
     },
 });
-
 const upload = multer({ storage });
-
 app.use('/uploads', express.static('uploads'));
 app.use(express.json());
 
 // FILES
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post('/upload', upload.single('file'), (req, res) => {
     res.json({
         url: `/uploads/${req.file.originalname}`,
     });
 });
 
+app.listen(process.env.PORT || 4000, (err) => {
+    if (err) {
+        return console.log(err);
+    }
+    console.log(`Server is OK PORT is ${process.env.PORT}`)
+})
