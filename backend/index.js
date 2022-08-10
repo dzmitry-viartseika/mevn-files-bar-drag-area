@@ -32,7 +32,7 @@ app.use(express.json());
 // FILES
 app.post('/single-upload', upload.single('file'), (req, res) => {
 
-    if (!req.file.length) {
+    if (!req.file) {
         return res.status(500).send({
             success: false,
             message: 'You have to select at least 1 file',
