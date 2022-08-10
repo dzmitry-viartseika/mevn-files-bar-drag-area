@@ -38,12 +38,12 @@ app.post('/single-upload', upload.single('file'), (req, res) => {
 });
 
 app.post('/multiple-upload', upload.array('files', 10), (req, res) => {
-    console.log(req.file);
+    console.log(req.files);
     // const result = req.files.map((file) => `/uploads/${file.originalname}`);
     // console.log('result', result);
-    res.json({
-        files: req.files,
-    });
+    // res.json({
+    //     files: req.files,
+    // });
 });
 
 app.listen(process.env.PORT || 4000, (err) => {

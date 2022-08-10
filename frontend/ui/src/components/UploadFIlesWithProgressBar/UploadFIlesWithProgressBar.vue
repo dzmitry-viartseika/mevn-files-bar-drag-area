@@ -3,13 +3,13 @@
     <Messages v-if="message" />
     <form @submit.prevent="onSubmit($event)">
       <div class='custom-file mb-4'>
-        <h1>Single upload file</h1>
+        <h1>Single upload files</h1>
         <input
           type='file'
           class='custom-file-input'
           id='customFile'
           @change="onChange($event)"
-          single
+          multiple
         />
         <label class='custom-file-label' htmlFor='customFile'>
           {{ filename }}
@@ -49,26 +49,28 @@ interface IFile {
     ProgressBar,
     Messages,
   }
-
 })
-export default class UploadFIleWithProgressBar extends Vue {
+export default class UploadFIlesWithProgressBar extends Vue {
   message: string = '';
-  filename: string = '';
+  filesName: string[] = [];
   uploadPercentage: number = 0;
-  file: any = '';
+  files: any = '';
   uploadedFile: IFile = {} as IFile;
 
   onChange(e: any) {
     if (!e) return;
-    this.file = e.target.files[0];
-    this.filename = e.target.files[0].name;
+    // eslint-disable-next-line
+    console.log('e.target.files', e.target.files);
+    this.files = e.target.files;
   }
 
   async onSubmit(e: any) {
     const formData = new FormData();
-    formData.append('file', this.file);
+    formData.append('files', this.files);
+    // eslint-disable-next-line
+    console.log('formData', formData);
     try {
-      const { data } = await axios.post('http://localhost:4000/single-upload',
+      const { data } = await axios.post('http://localhost:4000/multiple-upload',
         formData,
         {
           headers: {

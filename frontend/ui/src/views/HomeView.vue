@@ -1,6 +1,8 @@
 <template>
-<!--  <upload-file />-->
-  <UploadFIleWithProgressBar />
+  <div>
+    <h1>Upload File</h1>
+    <UploadFIleWithProgressBar />
+  </div>
 </template>
 
 <script lang="ts">
@@ -13,10 +15,6 @@ import UploadFIleWithProgressBar from '@/components/UploadFIleWithProgressBar/Up
     UploadFile,
     UploadFIleWithProgressBar,
   },
-
-  // components: {
-  //   HelloWorld,
-  // },
 })
 export default class HomeView extends Vue {}
 </script>
