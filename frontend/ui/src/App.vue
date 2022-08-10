@@ -3,7 +3,8 @@
     <nav>
       <router-link to="/">File</router-link> |
       <router-link to="/profile">Profile</router-link> |
-      <router-link to="/files">Files</router-link>
+      <router-link to="/files">Files</router-link> |
+      <router-link to="/drag-n-drop">drag-n-drop</router-link>
     </nav>
     <router-view/>
   </div>
