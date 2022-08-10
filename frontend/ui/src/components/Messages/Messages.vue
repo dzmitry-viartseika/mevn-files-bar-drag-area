@@ -1,11 +1,12 @@
 <template>
   <div class="alert alert-info alert-dismissible fade show" role='alert'>
-    { msg }
+    {{ msg }}
     <button
       type="button"
       class="close"
       data-dismiss="alert"
       aria-label="Close"
+      @click="clickEvent"
     >
       <span aria-hidden='true'>&times;</span>
     </button>
@@ -22,6 +23,11 @@ import {Vue, Options} from 'vue-class-component';
 })
 export default class Messages extends Vue {
   msg!: string;
+
+
+  clickEvent() {
+    this.$emit('clickEvent', '');
+  }
 }
 </script>
 

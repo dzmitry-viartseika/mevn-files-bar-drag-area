@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Messages v-if="message" />
+    <Messages
+      v-if="message"
+      :msg="message"
+      @clickEvent="clickEvent"
+    />
     <form @submit.prevent="onSubmit($event)">
       <div class='custom-file mb-4'>
         <h1>Single upload file</h1>
@@ -10,8 +14,9 @@
           id='customFile'
           @change="onChange($event)"
           single
+          required
         />
-        <label class='custom-file-label' htmlFor='customFile'>
+        <label class='custom-file-label' for='customFile'>
           {{ filename }}
         </label>
       </div>
@@ -38,6 +43,7 @@ import {Vue, Options} from 'vue-class-component';
 import Messages from '@/components/Messages/Messages.vue';
 import ProgressBar from "@/components/ProgressBar/ProgressBar.vue";
 import axios from 'axios';
+import { FILE_UPLOADED } from '@/constants/files-messages';
 
 interface IFile {
   fileName: string,
@@ -62,6 +68,10 @@ export default class UploadFIleWithProgressBar extends Vue {
     if (!e) return;
     this.file = e.target.files[0];
     this.filename = e.target.files[0].name;
+  }
+
+  clickEvent(): void {
+    this.message = '';
   }
 
   async onSubmit(e: any) {
@@ -89,7 +99,7 @@ export default class UploadFIleWithProgressBar extends Vue {
         filePath,
       };
 
-      this.message = 'file uploaded'
+      this.message = FILE_UPLOADED;
     } catch (err: any) {
       if (err && err.response.status === 500) {
         this.message = 'There was a problem with the server';

@@ -37,13 +37,32 @@ app.post('/single-upload', upload.single('file'), (req, res) => {
     });
 });
 
-app.post('/multiple-upload', upload.array('files', 10), (req, res) => {
-    console.log(req.files);
-    // const result = req.files.map((file) => `/uploads/${file.originalname}`);
-    // console.log('result', result);
-    // res.json({
-    //     files: req.files,
-    // });
+app.post('/multiple-upload', upload.array('imagesArray', 10), (req, res) => {
+
+    if (!req.files.length) {
+        return res.status(500).send({
+            success: false,
+            message: 'You have to select at least 1 file',
+        });
+    }
+
+    if (req.files.length > 2) {
+        return res.status(500).send({
+            success: false,
+            message: 'You have to select maximum 2 files',
+        });
+    }
+
+    const files = req.files.map((file) => {
+        return {
+            filePath: `/uploads/${file.originalname}`,
+            fileName: file.originalname,
+        }
+    });
+
+    res.json({
+        files,
+    });
 });
 
 app.listen(process.env.PORT || 4000, (err) => {
