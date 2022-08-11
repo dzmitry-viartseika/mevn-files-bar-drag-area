@@ -8,6 +8,8 @@
         name="file"
         accept="image/*"
         @change="onChange($event)"
+        required
+        single
       />
       <input type="submit" class="btn btn-primary">
     </form>
@@ -71,13 +73,9 @@ export default class ProfileView extends Vue {
           },
         });
 
-      const { url } = data;
+      const { filePath } = data;
 
-      this.uploadedFile = `http://localhost:4000${url}`;
-
-      // const resp = await axios.get('http://localhost:4000/uploads/');
-      // eslint-disable-next-line
-      // console.log('resp', resp);
+      this.uploadedFile = `http://localhost:4000${filePath}`;
 
     } catch (err: any) {
       if (err && err.response.status === 500) {
