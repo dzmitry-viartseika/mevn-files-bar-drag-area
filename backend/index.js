@@ -40,7 +40,8 @@ app.post('/single-upload', upload.single('file'), (req, res) => {
     }
 
     res.json({
-        url: `/uploads/${req.file.originalname}`,
+        filePath: `/uploads/${req.file.originalname}`,
+        fileName: req.file.originalname,
     });
 });
 
