@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import multer from 'multer';
 import cors from 'cors';
+import { FileController } from './controllers/index.js'
 import fs from 'fs';
 
 dotenv.config();
@@ -30,48 +31,9 @@ app.use('/uploads', express.static('uploads'));
 app.use(express.json());
 
 // FILES
-app.post('/single-upload', upload.single('file'), (req, res) => {
+app.post('/single-upload', upload.single('file'), FileController.uploadFile);
 
-    if (!req.file) {
-        return res.status(500).send({
-            success: false,
-            message: 'You have to select at least 1 file',
-        });
-    }
-
-    res.json({
-        filePath: `/uploads/${req.file.originalname}`,
-        fileName: req.file.originalname,
-    });
-});
-
-app.post('/multiple-upload', upload.array('imagesArray', 10), (req, res) => {
-
-    if (!req.files.length) {
-        return res.status(500).send({
-            success: false,
-            message: 'You have to select at least 1 file',
-        });
-    }
-
-    if (req.files.length > 2) {
-        return res.status(500).send({
-            success: false,
-            message: 'You have to select maximum 2 files',
-        });
-    }
-
-    const files = req.files.map((file) => {
-        return {
-            filePath: `/uploads/${file.originalname}`,
-            fileName: file.originalname,
-        }
-    });
-
-    res.json({
-        files,
-    });
-});
+app.post('/multiple-upload', upload.array('imagesArray', 10), FileController.uploadFiles);
 
 app.listen(process.env.PORT || 4000, (err) => {
     if (err) {

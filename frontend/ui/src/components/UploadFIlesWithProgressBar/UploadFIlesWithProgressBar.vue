@@ -16,19 +16,11 @@
           @change="onChange($event)"
           multiple
         />
-<!--        <label class="custom-file-label" for="customFile">-->
-<!--          <div-->
-<!--            v-for="file in filesName"-->
-<!--            :key="file.fileName"-->
-<!--          >-->
-<!--            {{ file.fileName }}-->
-<!--          </div>-->
-<!--        </label>-->
         <div
-          v-for="file in filesName"
+          v-for="file in files"
           :key="file.fileName"
         >
-          {{ file.fileName }}
+          {{ file.name }}
         </div>
       </div>
 
@@ -80,11 +72,7 @@ export default class UploadFIlesWithProgressBar extends Vue {
 
   onChange(e: any) {
     if (!e) return;
-    // eslint-disable-next-line
-    console.log('e.target.files', e.target.files);
     this.files = e.target.files;
-    // eslint-disable-next-line
-    console.log('this.files', this.files);
   }
 
   async onSubmit(e: any) {
@@ -93,7 +81,7 @@ export default class UploadFIlesWithProgressBar extends Vue {
       formData.append('imagesArray', this.files[i])
     }
     try {
-      const { data } = await axios.post('http://localhost:4000/multiple-upload',
+      await axios.post('http://localhost:4000/multiple-upload',
         formData,
         {
           headers: {
@@ -104,17 +92,7 @@ export default class UploadFIlesWithProgressBar extends Vue {
           }
         });
 
-      // Clear percentage
       setTimeout(() => this.uploadPercentage = 0, 3000);
-
-      // const { fileName, filePath } = data;
-
-      this.filesName = data.files;
-
-      // this.uploadedFile = {
-      //   fileName,
-      //   filePath,
-      // };
 
       this.message = FILES_UPLOADED;
     } catch (err: any) {
